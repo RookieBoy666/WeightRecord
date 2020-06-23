@@ -43,13 +43,15 @@ namespace WeightRecord
                     SqlDataAdapter da = new SqlDataAdapter(sql, Sqlconn);
                     da.Fill(ds);
                    dataGridView1.DataSource = ds.Tables[0];
-                    sMaterialNo.Text = dataGridView1.DataSource[0].Text.ToString();
+                    Sqlconn.Close();
                     if (dataGridView1.Rows.Count != 0)
                     {
-                        dataGridView1[0, ccc].Value.ToString();
+                        sMaterialNo.Text = dataGridView1[1, 0].Value.ToString();
+                        nLength.Text= dataGridView1[2, 0].Value.ToString();
+                        sEquipmentNo.Text= dataGridView1[3, 0].Value.ToString();
                     }
                         //  sMaterialNo.Text=
-                        Sqlconn.Close();
+                       
                 }
                 catch (Exception ee)
                 {

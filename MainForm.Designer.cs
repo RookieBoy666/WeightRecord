@@ -39,7 +39,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.nWeight = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.sEquipmentNo = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.cancel = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -138,12 +138,12 @@
             this.label5.TabIndex = 9;
             this.label5.Text = "重量";
             // 
-            // textBox5
+            // sEquipmentNo
             // 
-            this.textBox5.Location = new System.Drawing.Point(449, 135);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 21);
-            this.textBox5.TabIndex = 14;
+            this.sEquipmentNo.Location = new System.Drawing.Point(449, 135);
+            this.sEquipmentNo.Name = "sEquipmentNo";
+            this.sEquipmentNo.Size = new System.Drawing.Size(100, 21);
+            this.sEquipmentNo.TabIndex = 14;
             // 
             // label7
             // 
@@ -181,7 +181,7 @@
             this.ClientSize = new System.Drawing.Size(800, 644);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.cancel);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.sEquipmentNo);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.nWeight);
             this.Controls.Add(this.label5);
@@ -216,7 +216,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox nWeight;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox sEquipmentNo;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button cancel;
         private System.Windows.Forms.DataGridView dataGridView1;
