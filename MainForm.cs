@@ -128,7 +128,7 @@ namespace WeightRecord
             else
             {
 
-                string sql = "SELECT    a.sCardNo,a.sMaterialNo,a. nLength,sEquipmentNo,a.nUnitWeight,a.nWeight,a.sFabricNo FROM qmRawInspectHdr A WHERE   " + "  a.sFabricNo='" + @sFabricNo + "'";
+                string sql = "SELECT    a.sCardNo,a.sMaterialNo,a. nLength,sEquipmentNo,a.nUnitWeight,a.nWeight,a.sFabricNo,b.nGMWT FROM qmRawInspectHdr A JOIN dbo.mmMaterial b ON a.sMaterialNo=b.sMaterialNo AND b.bUsable=1 WHERE   " + "  a.sFabricNo='" + @sFabricNo + "'";
                 try
                 {
                     SqlConnection Sqlconn = new SqlConnection(connStr);
@@ -148,7 +148,7 @@ namespace WeightRecord
                         sMaterialNo.Text = dt.Rows[0][1].ToString();
                         nLength.Text = dt.Rows[0][2].ToString();
                         sEquipmentNo.Text = dt.Rows[0][3].ToString();
-                        nUnitWeight.Text = dt.Rows[0][4].ToString();
+                        nUnitWeight.Text = dt.Rows[0][6].ToString();
                         nWeight.Text = dt.Rows[0][5].ToString();
                     }
                     //  sMaterialNo.Text=
@@ -169,6 +169,52 @@ namespace WeightRecord
         private void lable1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void save_Click_1(object sender, EventArgs e)
+        {
+            decimal Weight;
+            string @nWeight= this.nWeight.Text;
+            if (@nWeight == "")
+                @nWeight = "0";
+            Weight= Convert.ToDecimal(@nWeight);
+
+            
+            string @sLength = this.nLength.Text;
+            if (@sLength == "")
+            {
+                MessageBox.Show("长度不能为空，除0操作！");
+                return;
+            }
+            nUnitWeight.Text = (Weight * 1000 / Convert.ToDecimal(@sLength)).ToString();
+
+            string sql = "UPDATE qmRawInspectHdr SET nUnitWeight=" + Math.Round(Convert.ToDecimal(nUnitWeight.Text),2)+",nWeight=" + Math.Round(Weight, 2)  + " WHERE  sFabricNo='"+ this.sFabricNo.Text.Trim() + "'";
+            try
+            {
+                SqlConnection Sqlconn = new SqlConnection(connStr);
+                SqlCommand cmd = new SqlCommand(sql, Sqlconn);
+                Sqlconn.Open();
+                cmd.ExecuteNonQuery();
+                Sqlconn.Close();
+                MessageBox.Show("保存成功！");
+    
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.Message, "保存失败", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+        }
+
+        private void nWeight_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < 48 || e.KeyChar >57) && (e.KeyChar != 8) && (e.KeyChar != 46))
+                e.Handled = true;
+        }
+
+        private void cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
