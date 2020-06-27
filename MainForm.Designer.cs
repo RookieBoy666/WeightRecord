@@ -34,7 +34,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.nLength = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.nUnitWeight = new System.Windows.Forms.TextBox();
+            this.sRawGMWT = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.sMaterialNo = new System.Windows.Forms.TextBox();
@@ -46,6 +46,7 @@
             this.lable1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.nWeight = new System.Windows.Forms.TextBox();
             this.CalcLength = new System.Windows.Forms.TextBox();
             this.intervalValue = new System.Windows.Forms.NumericUpDown();
@@ -57,120 +58,123 @@
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.Mainpanel = new System.Windows.Forms.Panel();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.intervalValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.Mainpanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // sEquipmentNo
             // 
             this.sEquipmentNo.Enabled = false;
-            this.sEquipmentNo.Location = new System.Drawing.Point(502, 119);
-            this.sEquipmentNo.Multiline = true;
+            this.sEquipmentNo.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.sEquipmentNo.Location = new System.Drawing.Point(502, 118);
             this.sEquipmentNo.Name = "sEquipmentNo";
             this.sEquipmentNo.ReadOnly = true;
-            this.sEquipmentNo.Size = new System.Drawing.Size(136, 37);
+            this.sEquipmentNo.Size = new System.Drawing.Size(136, 26);
             this.sEquipmentNo.TabIndex = 30;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(431, 136);
+            this.label7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.Location = new System.Drawing.Point(432, 122);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(51, 20);
+            this.label7.Size = new System.Drawing.Size(58, 22);
             this.label7.TabIndex = 29;
             this.label7.Text = "设备号";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label5.Location = new System.Drawing.Point(146, 180);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(45, 20);
+            this.label5.Size = new System.Drawing.Size(71, 30);
             this.label5.TabIndex = 27;
             this.label5.Text = "重  量";
             // 
             // nLength
             // 
             this.nLength.Enabled = false;
-            this.nLength.Location = new System.Drawing.Point(502, 27);
-            this.nLength.Multiline = true;
+            this.nLength.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.nLength.Location = new System.Drawing.Point(502, 40);
             this.nLength.Name = "nLength";
             this.nLength.ReadOnly = true;
-            this.nLength.Size = new System.Drawing.Size(136, 37);
+            this.nLength.Size = new System.Drawing.Size(136, 26);
             this.nLength.TabIndex = 26;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(431, 41);
+            this.label4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.Location = new System.Drawing.Point(432, 40);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(45, 20);
+            this.label4.Size = new System.Drawing.Size(52, 22);
             this.label4.TabIndex = 25;
             this.label4.Text = "长  度";
             // 
-            // nUnitWeight
+            // sRawGMWT
             // 
-            this.nUnitWeight.Enabled = false;
-            this.nUnitWeight.Location = new System.Drawing.Point(502, 73);
-            this.nUnitWeight.Multiline = true;
-            this.nUnitWeight.Name = "nUnitWeight";
-            this.nUnitWeight.ReadOnly = true;
-            this.nUnitWeight.Size = new System.Drawing.Size(136, 37);
-            this.nUnitWeight.TabIndex = 24;
+            this.sRawGMWT.Enabled = false;
+            this.sRawGMWT.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.sRawGMWT.Location = new System.Drawing.Point(502, 81);
+            this.sRawGMWT.Name = "sRawGMWT";
+            this.sRawGMWT.ReadOnly = true;
+            this.sRawGMWT.Size = new System.Drawing.Size(136, 26);
+            this.sRawGMWT.TabIndex = 24;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(431, 90);
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(431, 85);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 20);
+            this.label3.Size = new System.Drawing.Size(52, 22);
             this.label3.TabIndex = 23;
             this.label3.Text = "克  重";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(146, 136);
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(147, 122);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 20);
+            this.label2.Size = new System.Drawing.Size(52, 22);
             this.label2.TabIndex = 22;
             this.label2.Text = "款  号";
             // 
             // sMaterialNo
             // 
             this.sMaterialNo.Enabled = false;
-            this.sMaterialNo.Location = new System.Drawing.Point(213, 121);
-            this.sMaterialNo.Multiline = true;
+            this.sMaterialNo.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.sMaterialNo.Location = new System.Drawing.Point(213, 118);
             this.sMaterialNo.Name = "sMaterialNo";
             this.sMaterialNo.ReadOnly = true;
-            this.sMaterialNo.Size = new System.Drawing.Size(136, 37);
+            this.sMaterialNo.Size = new System.Drawing.Size(136, 26);
             this.sMaterialNo.TabIndex = 21;
             // 
             // sCardNo
             // 
             this.sCardNo.Enabled = false;
-            this.sCardNo.Location = new System.Drawing.Point(213, 74);
-            this.sCardNo.Multiline = true;
+            this.sCardNo.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.sCardNo.Location = new System.Drawing.Point(213, 81);
             this.sCardNo.Name = "sCardNo";
             this.sCardNo.ReadOnly = true;
-            this.sCardNo.Size = new System.Drawing.Size(136, 37);
+            this.sCardNo.Size = new System.Drawing.Size(136, 26);
             this.sCardNo.TabIndex = 20;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(146, 90);
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(147, 85);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 20);
+            this.label1.Size = new System.Drawing.Size(52, 22);
             this.label1.TabIndex = 19;
             this.label1.Text = "卡  号";
             // 
@@ -196,36 +200,37 @@
             // 
             // sFabricNo
             // 
-            this.sFabricNo.Location = new System.Drawing.Point(213, 27);
-            this.sFabricNo.Multiline = true;
+            this.sFabricNo.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.sFabricNo.Location = new System.Drawing.Point(213, 40);
             this.sFabricNo.Name = "sFabricNo";
-            this.sFabricNo.Size = new System.Drawing.Size(136, 37);
+            this.sFabricNo.Size = new System.Drawing.Size(136, 26);
             this.sFabricNo.TabIndex = 38;
             this.sFabricNo.MouseLeave += new System.EventHandler(this.textBox1_MouseLeave);
             // 
             // lable1
             // 
             this.lable1.AutoSize = true;
-            this.lable1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lable1.Location = new System.Drawing.Point(146, 41);
+            this.lable1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lable1.Location = new System.Drawing.Point(149, 40);
             this.lable1.Name = "lable1";
-            this.lable1.Size = new System.Drawing.Size(51, 20);
+            this.lable1.Size = new System.Drawing.Size(58, 22);
             this.lable1.TabIndex = 37;
             this.lable1.Text = "布卷号";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label6.Location = new System.Drawing.Point(431, 180);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(65, 20);
+            this.label6.Size = new System.Drawing.Size(101, 30);
             this.label6.TabIndex = 39;
             this.label6.Text = "折算长度";
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.nWeight);
             this.panel1.Controls.Add(this.sMaterialNo);
             this.panel1.Controls.Add(this.CalcLength);
@@ -238,7 +243,7 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.lable1);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.nUnitWeight);
+            this.panel1.Controls.Add(this.sRawGMWT);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.sEquipmentNo);
             this.panel1.Controls.Add(this.label7);
@@ -247,14 +252,21 @@
             this.panel1.Size = new System.Drawing.Size(840, 232);
             this.panel1.TabIndex = 40;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(345, 193);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(31, 36);
+            this.pictureBox1.TabIndex = 41;
+            this.pictureBox1.TabStop = false;
+            // 
             // nWeight
             // 
-            this.nWeight.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.nWeight.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nWeight.ForeColor = System.Drawing.Color.Red;
-            this.nWeight.Location = new System.Drawing.Point(213, 168);
-            this.nWeight.Multiline = true;
+            this.nWeight.Location = new System.Drawing.Point(213, 180);
             this.nWeight.Name = "nWeight";
-            this.nWeight.Size = new System.Drawing.Size(136, 37);
+            this.nWeight.Size = new System.Drawing.Size(126, 36);
             this.nWeight.TabIndex = 28;
             this.nWeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nWeight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nWeight_KeyPress);
@@ -262,10 +274,10 @@
             // CalcLength
             // 
             this.CalcLength.Enabled = false;
-            this.CalcLength.Location = new System.Drawing.Point(502, 165);
-            this.CalcLength.Multiline = true;
+            this.CalcLength.Font = new System.Drawing.Font("宋体", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.CalcLength.Location = new System.Drawing.Point(526, 180);
             this.CalcLength.Name = "CalcLength";
-            this.CalcLength.Size = new System.Drawing.Size(136, 37);
+            this.CalcLength.Size = new System.Drawing.Size(112, 32);
             this.CalcLength.TabIndex = 40;
             // 
             // intervalValue
@@ -358,7 +370,7 @@
             this.Mainpanel.Controls.Add(this.save);
             this.Mainpanel.Location = new System.Drawing.Point(12, 12);
             this.Mainpanel.Name = "Mainpanel";
-            this.Mainpanel.Size = new System.Drawing.Size(1016, 617);
+            this.Mainpanel.Size = new System.Drawing.Size(1016, 629);
             this.Mainpanel.TabIndex = 44;
             // 
             // MainForm
@@ -370,14 +382,17 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "称重记录";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.intervalValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.Mainpanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -388,7 +403,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox nLength;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox nUnitWeight;
+        private System.Windows.Forms.TextBox sRawGMWT;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox sMaterialNo;
@@ -411,6 +426,8 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TextBox nWeight;
         private System.Windows.Forms.Panel Mainpanel;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.BindingSource bindingSource1;
     }
 }
 

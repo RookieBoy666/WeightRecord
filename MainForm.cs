@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.IO.Ports;
 using System.Text;
 using System.Threading;
@@ -13,6 +14,7 @@ namespace WeightRecord
     public partial class MainForm : Form
     {
         private SerialPort com;
+        private int isStable = 0;
         public static string connStr = "Data Source=192.168.88.4;Initial Catalog = HSTextileERP;Persist Security Info = True;User ID = zjp;Password =123456 ";
         public MainForm()
         {
@@ -27,9 +29,9 @@ namespace WeightRecord
             Mainpanel.Location = new System.Drawing.Point(x, y);
 
         }
-  
 
-       
+
+
 
         private void save_Click(object sender, EventArgs e)
         {
@@ -49,7 +51,7 @@ namespace WeightRecord
                     sMaterialNo.Text = dt.Rows[0][1].ToString();
                     nLength.Text = dt.Rows[0][2].ToString();
                     sEquipmentNo.Text = dt.Rows[0][3].ToString();
-                    nUnitWeight.Text = dt.Rows[0][4].ToString();
+                    sRawGMWT.Text = dt.Rows[0][4].ToString();
                     nWeight.Text = dt.Rows[0][5].ToString();
                 }
 
@@ -91,14 +93,18 @@ namespace WeightRecord
             //string str = this.sFabricNo.Text.Trim();
             //Thread th = new Thread(delegate () { new SearchForm(str).ShowDialog(); });
             //th.Start();
-            string sql = "SELECT  top 100 a.sFabricNo, a.sCardNo,a.sMaterialNo,a. nLength,sEquipmentNo,a.nUnitWeight,a.nWeight,tcreatetime FROM qmRawInspectHdr A  where nWeight is not null   order by tcreatetime desc ";
+            if (string.IsNullOrEmpty(this.sFabricNo.Text.Trim()))
+            { 
+
+            }
+            string sql = "SELECT  top 100 a.sFabricNo, a.sCardNo,a.sMaterialNo,a. nLength,sEquipmentNo,a.nUnitWeight,a.nWeight,A.tcreatetime FROM qmRawInspectHdr A  where nWeight is not null   order by tcreatetime desc ";
 
             try
             {
                 string @sFabricNo = (this.sFabricNo.Text).Trim();
                 if (!string.IsNullOrEmpty(@sFabricNo))
                 {
-                    sql = "SELECT    a.sFabricNo, a.sCardNo,a.sMaterialNo,a. nLength,sEquipmentNo,a.nUnitWeight,a.nWeight,tcreatetime FROM qmRawInspectHdr A   where a.sFabricNo='" + @sFabricNo + "'";
+                    sql = "SELECT    a.sFabricNo, a.sCardNo,a.sMaterialNo,a. nLength,sEquipmentNo,b.sRawGMWT,a.nWeight,A.tcreatetime FROM qmRawInspectHdr A join mmMaterial b on a.sMaterialNo=b.sMaterialNo and b.bUsable=1   where a.sFabricNo='" + @sFabricNo + "'";
                 }
                 SqlConnection Sqlconn = new SqlConnection(MainForm.connStr);
                 SqlCommand cmd = new SqlCommand(sql, Sqlconn);
@@ -132,11 +138,16 @@ namespace WeightRecord
             string @sFabricNo = this.sFabricNo.Text.Trim();
             if (string.IsNullOrEmpty(@sFabricNo))
             {
+                sCardNo.Text = "";
+                sMaterialNo.Text = "";
+                nLength.Text = "";
+                sRawGMWT.Text = "";
+                sEquipmentNo.Text = "";
                 return;
             }
             else
             {
-                string sql = "SELECT    a.sCardNo,a.sMaterialNo,a. nLength,sEquipmentNo,a.nUnitWeight,a.nWeight,a.sFabricNo,b.nGMWT FROM qmRawInspectHdr A JOIN dbo.mmMaterial b ON a.sMaterialNo=b.sMaterialNo AND b.bUsable=1 WHERE   " + "  a.sFabricNo='" + @sFabricNo + "'";
+                string sql = "SELECT    a.sCardNo,a.sMaterialNo,a. nLength,sEquipmentNo,a.nUnitWeight,a.nWeight,a.sFabricNo,b.sRawGMWT FROM qmRawInspectHdr A JOIN dbo.mmMaterial b ON a.sMaterialNo=b.sMaterialNo AND b.bUsable=1 WHERE   " + "  a.sFabricNo='" + @sFabricNo + "'";
                 try
                 {
                     SqlConnection Sqlconn = new SqlConnection(connStr);
@@ -156,7 +167,7 @@ namespace WeightRecord
                         sMaterialNo.Text = dt.Rows[0][1].ToString();
                         nLength.Text = dt.Rows[0][2].ToString();
                         sEquipmentNo.Text = dt.Rows[0][3].ToString();
-                        nUnitWeight.Text = string.IsNullOrEmpty(dt.Rows[0][7].ToString()) ? "0.00" : dt.Rows[0][7].ToString();
+                        sRawGMWT.Text = string.IsNullOrEmpty(dt.Rows[0][7].ToString()) ? "0.00" : dt.Rows[0][7].ToString();
                     }
                 }
                 catch (Exception ee)
@@ -174,35 +185,68 @@ namespace WeightRecord
                 MessageBox.Show("布卷号为空，确认失败！", "警告");
                 return;
             }
+            if (isStable != 1)
+            {
+                MessageBox.Show("当前称重量不稳定，保存失败！", "警告");
+                return;
+            }
             decimal Weight;
             string @nWeight = this.nWeight.Text;
             if (@nWeight == "")
                 @nWeight = "0";
             Weight = Convert.ToDecimal(@nWeight);
-
-            //string @sLength = this.nLength.Text;
-            //if (@sLength == "" || sLength=="0.00")
-            //{
-            //    MessageBox.Show("长度不能为空，除0操作！");
-            //    return;
-            //}
-            // nUnitWeight.Text = (Weight * 1000 / Convert.ToDecimal(@sLength)).ToString();
-
             string sql = "UPDATE qmRawInspectHdr SET" + " nWeight=" + Math.Round(Weight, 2) + " WHERE  sFabricNo='" + this.sFabricNo.Text.Trim() + "'";
+
+
+            //吧qmRawInspectHdr表中长度更新为折算长度
+            string sqlLength = "update qmRawInspectHdr SET nLength="+ CalcLength.Text+ " where sFabricNo='" + this.sFabricNo.Text.Trim() + "'";
+
+            //搜寻mmMaterial表中 sModel字段  ，此字段保存最初qmRawInspectHdr的长度（第一次）
+            string getsModel = "select sModel from mmMaterial a where sMaterialNo='"+sMaterialNo.Text.ToString()+"'";
+            string sqlsModel = "update mmMaterial set sModel='"+nLength.Text.ToString()+ "' where sMaterialNo='" + sMaterialNo.Text.ToString() + "'" ;
+
+          //  string sqlnewLength = "update qmRawInspectHdr SET nLength=" + CalcLength.Text + " where sFabricNo='" + this.sFabricNo.Text.Trim() + "'";
+
             try
             {
                 SqlConnection Sqlconn = new SqlConnection(connStr);
                 SqlCommand cmd = new SqlCommand(sql, Sqlconn);
+               // SqlCommand getsModelcmd=new SqlCommand(getsModel, Sqlconn);
                 Sqlconn.Open();
-                cmd.ExecuteNonQuery();
+
+                cmd.ExecuteNonQuery();//更新qmRawInspectHdr的重量
+
+                SqlDataAdapter da = new SqlDataAdapter(getsModel, Sqlconn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                string sModel =ds.Tables[0].Rows[0][0].ToString();
+              
+
+                if(string.IsNullOrEmpty(sModel))
+                {
+                    SqlCommand cmdsModel = new SqlCommand(sqlsModel, Sqlconn);
+                    cmdsModel.ExecuteNonQuery();//如果sModel为空，更新mmMaterial表中的sModel为qmRawInspectHdr表最初的长度（第一次）
+                }
+
+                SqlCommand cmdsqlLength = new SqlCommand(sqlLength, Sqlconn);
+                cmdsqlLength.ExecuteNonQuery();//qmRawInspectHdr表中长度更新为折算长度
+
+
+
                 Sqlconn.Close();
                 MessageBox.Show("保存成功！");
+                Log log = new Log();
+                log.RegisterLog(string.Format("布卷号{0}的重量是{1}", this.sFabricNo.Text.Trim(), Math.Round(Weight, 2)), DateTime.Now.ToString());
                 // PJ190327002
                 search.PerformClick();
+
             }
             catch (Exception ee)
             {
                 MessageBox.Show(ee.Message, "保存失败", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
             }
 
         }
@@ -246,85 +290,31 @@ namespace WeightRecord
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        //private void Com_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        //{
-        //    ////   Thread.Sleep(500);//线程休眠500毫秒，方便接收串口的全部数据
-        //    try
-        //    {
-        //        if (com.IsOpen)
-        //        {
-        //            byte[] readBuffer = new byte[com.ReadBufferSize + 1];
-        //            try
-        //            {
-        //                int count = com.Read(readBuffer, 0, com.ReadBufferSize);        //读取串口数据(监听)
-        //                String SerialIn = System.Text.Encoding.ASCII.GetString(readBuffer, 0, count);//将字节数组解码为字符串
-        //                if (count != 0)
-        //                {
-        //                    //这里强调一下,线程里不可以直接对UI进行赋值，只能使用委托操作控件
-        //                    this.BeginInvoke(new System.Threading.ThreadStart(delegate ()
-        //                    {
-        //                        nWeight.Text = SerialIn;
-        //                    }));
-
-        //                }
-        //            }
-        //            catch (TimeoutException) { }
-        //        }
-        //        else
-        //        {
-        //            TimeSpan waitTime = new TimeSpan(0, 0, 0, 0, 50);
-        //            Thread.Sleep(waitTime);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.ToString());
-        //    }
-        //}
+         
 
 
-        private void btnOpenPort_Click(object sender, EventArgs e)
-        {
-            com.Open();
-        }
-
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-        //    string senStr;
-        //    senStr = sentMsg.Text;
-        //    try
-        //    {
-        //        serialPort1.Write(senStr);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        MessageBox.Show("发送失败");
-        //    }
-        //}
-
+  
         private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             byte[] readBuffer = new byte[serialPort1.ReadBufferSize + 1];
             try
             {
-                int count = serialPort1.Read(readBuffer, 0, serialPort1.ReadBufferSize);
+                // int count = serialPort1.Read(readBuffer, 0, serialPort1.ReadBufferSize);
                 //int count = com.Read(readBuffer, 0, com.ReadBufferSize);        //读取串口数据(监听)
                 string SerialIn = serialPort1.ReadLine();// System.Text.Encoding.ASCII.GetString(readBuffer, 0, count);//将字节数组解码为字符串
                 Console.WriteLine(SerialIn);
                 // return;
-                if (count != 0)
+                if (SerialIn != string.Empty)
                 {
                     ///textBox1.Text = SerialIn;
                     //这里强调一下,线程里不可以直接对UI进行赋值，只能使用委托操作控件
                     this.BeginInvoke(new System.Threading.ThreadStart(delegate ()
                     {
-
                         string initData = SerialIn;
-
                         string aaa = initData;
                         //ST,GS,+   0.00kg
                         string[] array = aaa.Split(',');
-                        int k = -1;
+                        int k = -1, m = -1;
 
                         for (int i = 0; i < array.Length; i++)
                         {
@@ -332,10 +322,33 @@ namespace WeightRecord
                             {
                                 k = i;
                             }
+                            if (array[i].Contains("ST"))
+                            {
+                                m = i;
+                            }
                         }
                         if (k != -1)
                         {
                             nWeight.Text = (array[k].Trim().Replace('+', ' ').Replace('-', ' ').Replace("kg", " ")).Trim();
+                             if(sRawGMWT.Text!="" && Convert.ToDecimal(sRawGMWT.Text)>0)
+                            {
+                                Decimal @nWeight= Convert.ToDecimal(this.nWeight.Text);
+                                Decimal @sRawGMWT = Convert.ToDecimal(this.sRawGMWT.Text);
+                                CalcLength.Text = Math.Round((@nWeight * 1000 / @sRawGMWT*100),2).ToString();
+                            }
+                        }
+                        if (m != -1)
+                        {
+                            //pictureBox1.Show();
+                            isStable = 1;
+                            string picPath = Application.StartupPath.Replace("bin\\Debug", "pic") + "\\1.ico";
+                            pictureBox1.Image = Image.FromFile(picPath);
+                        }
+                        else
+                        {
+                            isStable = 0;
+                            string picPath = Application.StartupPath.Replace("bin\\Debug", "pic") + "\\2.ico";
+                            pictureBox1.Image = Image.FromFile(picPath);
                         }
                     }));
                 }
@@ -348,52 +361,7 @@ namespace WeightRecord
             serialPort1.Open();
         }
 
-        //private void open_Click(object sender, EventArgs e)
-        //{
-        //    string[] str = SerialPort.GetPortNames();
-        //    if (str.Length == 0)
-        //    {
-        //        MessageBox.Show("本机没有串口,磅秤重量读取将会失败！", "警告");
-        //        return;
-        //    }
-
-        //    //添加串口项目
-        //    foreach (string s in System.IO.Ports.SerialPort.GetPortNames())
-        //    {//获取有多少个COM口
-
-        //        cmbPort.Items.Add(s);
-        //    }
-        //    cmbPort.SelectedIndex = 0;//默认选择第一个COM1
-
-        //    if (com.IsOpen)
-        //    {
-        //        com.Close();
-        //    }
-
-        //    com.PortName = cmbPort.SelectedItem.ToString();
-        //    // // com.PortName //= serialName;
-        //    // //  com = new SerialPort("COM1");       //实例化SerialPort并设置COM口
-
-        //    com.BaudRate = 9600;//波特率
-        //    com.Parity = Parity.None;//无奇偶校验位
-        //    com.StopBits = StopBits.Two;//两个停止位
-        //    com.Handshake = Handshake.RequestToSend;//控制协议
-        //    com.ReceivedBytesThreshold = 13;//设置 DataReceived 事件发生前内部输入缓冲区中的字节数,我这里是13字节为一组
-        //                                    //// com.Open();                 //打开串口  
-        //    if (!com.IsOpen)
-        //    {
-        //        try
-        //        {
-        //            com.Open();
-        //            //  MessageBox.Show(string.Format("打开串口{0}成功！",com.PortName));
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show(ex.ToString());
-        //        }
-        //    }
-        //}
-
+       
         //发送R
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -407,7 +375,7 @@ namespace WeightRecord
             {
                 serialPort1.Open();
             }
-            string senStr="R";
+            string senStr = "R";
             //senStr = sentMsg.Text;
             try
             {
@@ -416,7 +384,14 @@ namespace WeightRecord
             catch (Exception)
             {
                 //MessageBox.Show("发送失败");
+
             }
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            timer1.Enabled = false;
+
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace WeightRecord
 {
-    public class Log
+    public    class Log
     {
         private string Event { get; set; }
         private DateTime Time { get; set; }
