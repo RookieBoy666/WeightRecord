@@ -6,14 +6,14 @@ using System.Text;
 
 namespace WeightRecord
 {
-    public    class Log
+    public  static  class Log
     {
-        private string Event { get; set; }
-        private DateTime Time { get; set; }
+        //private string Event { get; set; }
+        //private DateTime Time { get; set; }
 
 
         //注册
-        public void RegisterLog(string userEventname, string Time)
+        public static void RegisterLog(string userEventname, string Time)
         {            //判断是否已经有了这个文件
             if (!System.IO.File.Exists("log.txt"))
             {

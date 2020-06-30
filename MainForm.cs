@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -6,6 +7,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO.Ports;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace WeightRecord
 {
@@ -13,49 +15,68 @@ namespace WeightRecord
     {
         private SerialPort com;
         private int isStable = 0;
-        public static string connStr = "Data Source=192.168.88.4;Initial Catalog = HSTextileERP;Persist Security Info = True;User ID = zjp;Password =123456 ";
+        public static string connStr = ConfigHelper.GetConnectSql("SQL.xml");
+
+        // public static string connStr = "Data Source=192.168.88.4;Initial Catalog = HSTextileERP;Persist Security Info = True;User ID = zjp;Password =123456 ;Connect Timeout=8;";
         string setInterval = ConfigurationSettings.AppSettings["setInterval"];
         string setCOM = ConfigurationSettings.AppSettings["chooseCOM"];
-        string sentStr= ConfigurationSettings.AppSettings["senStr"].ToUpper();
+        string sentStr = ConfigurationSettings.AppSettings["senStr"];
         public MainForm()
         {
             InitializeComponent();
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
+            //Log log = new Log();
+            //log.RegisterLog(connStr, DateTime.Now.ToString());
             label8.Hide();
             this.MaximizeBox = false;
-            search.PerformClick();
+            // search.PerformClick();
             com = new SerialPort();
             string[] str = SerialPort.GetPortNames();
             if (str.Length == 0)
             {
-                MessageBox.Show("本机没有串口,磅秤重量读取将会失败！", "警告");
+                MessageBox.Show("本机没有串口或者串口连接失败,磅秤重量读取将会失败！", "警告");
                 return;
             }
 
             string[] portNmaes;
+            ArrayList arrayList = new ArrayList();
             // List<string> portNmaes = new List<string>();
             //添加串口项目
             foreach (string s in System.IO.Ports.SerialPort.GetPortNames())
             {//获取有多少个COM口
-
-
-
-                //cmbPort.Items.Add(s);
+                arrayList.Add(s);
             }
+            for (int i = 0; i < arrayList.Count; i++)
+            {
+                ConfigHelper.SetValue("getAllCOM", "本机的所有可用端口为：" + arrayList[i].ToString() + " ");
+
+            }
+            ConfigHelper.SetValue("AllCOMCount", "此设备共有" + arrayList.Count.ToString() + "个可用COM端口");
+
+            if (arrayList.Count == 1)
+            {
+                setCOM = arrayList[0].ToString();  //有1个串口 默认取这个
+            }
+            else
+            {
+                //多余1个串口 ，就取配置文件中串口
+            }
+
             // cmbPort.SelectedIndex = 0;//默认选择第一个COM 
             try
             {
                 serialPort1.PortName = setCOM;//str[0];}
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 label8.Show();
                 label8.Text = "串口配置失败！";
-            }
 
             }
+
+        }
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
@@ -92,28 +113,7 @@ namespace WeightRecord
                 MessageBox.Show(ee.Message, "保存失败", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
-        //private void search_Click(object sender, EventArgs e)
-        //{
-        //    string sql = "SELECT  top 100  a.sCardNo,a.sFabricNo,a.sMaterialNo,a. nLength,sEquipmentNo,a.nUnitWeight,a.nWeight FROM qmRawInspectHdr A  order by tcreatetime desc ";
-        //    try
-        //    {
-        //        SqlConnection Sqlconn = new SqlConnection(connStr);
-        //        SqlCommand cmd = new SqlCommand(sql, Sqlconn);
-        //        Sqlconn.Open();
-        //        DataSet ds = new DataSet();
-        //        SqlDataAdapter da = new SqlDataAdapter(sql, Sqlconn);
-        //        da.Fill(ds);
-        //        DataTable dt = new DataTable();
-        //        // dt = ds.Tables[0];
-        //        da.Fill(dt);
-        //        //dataGridView1.DataSource = ds.Tables[0];
-        //        Sqlconn.Close();
-        //    }
-        //    catch (Exception ee)
-        //    {
-        //        MessageBox.Show(ee.Message, "查找失败", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        //    }
-        //}
+
         private void search_Click_1(object sender, EventArgs e)
         {
             //string str = this.sFabricNo.Text.Trim();
@@ -130,14 +130,14 @@ namespace WeightRecord
                 sMaterialNo.Text = "";
                 sEquipmentNo.Text = "";
             }
-            string sql = "SELECT  top 100 a.sFabricNo, a.sCardNo,a.sMaterialNo,a. nLength,sEquipmentNo,a.nUnitWeight,a.nWeight,A.tcreatetime FROM qmRawInspectHdr A  where nWeight is not null   order by tcreatetime desc ";
+            string sql = "SELECT  top 100 a.sFabricNo, a.sCardNo,a.sMaterialNo,a. nLength,b.sModel,sEquipmentNo,b.sRawGMWT,a.nWeight,A.Tupdatetime FROM qmRawInspectHdr A join mmMaterial b on a.sMaterialNo=b.sMaterialNo and b.bUsable=1   where nWeight is not null   order by a.tupdateTime desc ";
 
             try
             {
                 string @sFabricNo = (this.sFabricNo.Text).Trim();
                 if (!string.IsNullOrEmpty(@sFabricNo))
                 {
-                    sql = "SELECT    a.sFabricNo, a.sCardNo,a.sMaterialNo,a. nLength,sEquipmentNo,b.sRawGMWT,a.nWeight,A.tcreatetime FROM qmRawInspectHdr A join mmMaterial b on a.sMaterialNo=b.sMaterialNo and b.bUsable=1   where a.sFabricNo='" + @sFabricNo + "'";
+                    sql = "SELECT    a.sFabricNo, a.sCardNo,a.sMaterialNo,a.nLength,b.sModel,sEquipmentNo,b.sRawGMWT,a.nWeight,A.Tupdatetime FROM qmRawInspectHdr A join mmMaterial b on a.sMaterialNo=b.sMaterialNo and b.bUsable=1   where a.sFabricNo='" + @sFabricNo + "'";
                 }
                 SqlConnection Sqlconn = new SqlConnection(MainForm.connStr);
                 SqlCommand cmd = new SqlCommand(sql, Sqlconn);
@@ -150,11 +150,13 @@ namespace WeightRecord
                 dataGridView1.Columns[0].HeaderText = "布卷号";
                 dataGridView1.Columns[1].HeaderText = "卡号";
                 dataGridView1.Columns[2].HeaderText = "款号";
-                dataGridView1.Columns[3].HeaderText = "长度";
-                dataGridView1.Columns[4].HeaderText = "设备号";
-                dataGridView1.Columns[5].HeaderText = "克重";
-                dataGridView1.Columns[6].HeaderText = "重量";
-                dataGridView1.Columns[7].HeaderText = "创建时间";
+                dataGridView1.Columns[3].HeaderText = "折算长度";
+                dataGridView1.Columns[4].HeaderText = "长度";
+                dataGridView1.Columns[5].HeaderText = "设备号";
+                dataGridView1.Columns[6].HeaderText = "克重";
+                dataGridView1.Columns[7].HeaderText = "重量";
+                dataGridView1.Columns[8].HeaderText = "更新时间";
+                //   dataGridView1.Columns[9].HeaderText = "更新时间";
                 Sqlconn.Close();
             }
             catch (Exception ee)
@@ -180,7 +182,7 @@ namespace WeightRecord
             }
             else
             {
-                string sql = "SELECT    a.sCardNo,a.sMaterialNo,a. nLength,sEquipmentNo,a.nUnitWeight,a.nWeight,a.sFabricNo,b.sRawGMWT FROM qmRawInspectHdr A JOIN dbo.mmMaterial b ON a.sMaterialNo=b.sMaterialNo AND b.bUsable=1 WHERE   " + "  a.sFabricNo='" + @sFabricNo + "'";
+                string sql = "SELECT    a.sFabricNo,a.sCardNo,a.sMaterialNo,a.nLength,b.sModel,sEquipmentNo,b.sRawGMWT,a.nWeight,A.TUPDATETIME FROM qmRawInspectHdr A JOIN dbo.mmMaterial b ON a.sMaterialNo=b.sMaterialNo AND b.bUsable=1 WHERE   " + "  a.sFabricNo='" + @sFabricNo + "'";
                 try
                 {
                     SqlConnection Sqlconn = new SqlConnection(connStr);
@@ -192,15 +194,25 @@ namespace WeightRecord
                     DataTable dt = new DataTable();
                     // dt = ds.Tables[0];
                     da.Fill(dt);
-                    // dataGridView1.DataSource = ds.Tables[0];
+                    dataGridView1.DataSource = ds.Tables[0];
+
+                    dataGridView1.Columns[0].HeaderText = "布卷号";
+                    dataGridView1.Columns[1].HeaderText = "卡号";
+                    dataGridView1.Columns[2].HeaderText = "款号";
+                    dataGridView1.Columns[3].HeaderText = "折算长度";
+                    dataGridView1.Columns[4].HeaderText = "长度";
+                    dataGridView1.Columns[5].HeaderText = "设备号";
+                    dataGridView1.Columns[6].HeaderText = "克重";
+                    dataGridView1.Columns[7].HeaderText = "重量";
+                    dataGridView1.Columns[8].HeaderText = "更新时间";
                     Sqlconn.Close();
                     if (dt.Rows.Count > 0)
                     {
-                        sCardNo.Text = dt.Rows[0][0].ToString();
-                        sMaterialNo.Text = dt.Rows[0][1].ToString();
-                        nLength.Text = dt.Rows[0][2].ToString();
-                        sEquipmentNo.Text = dt.Rows[0][3].ToString();
-                        sRawGMWT.Text = string.IsNullOrEmpty(dt.Rows[0][7].ToString()) ? "0.00" : dt.Rows[0][7].ToString();
+                        sCardNo.Text = dt.Rows[0][1].ToString();
+                        sMaterialNo.Text = dt.Rows[0][2].ToString();
+                        nLength.Text = dt.Rows[0][4].ToString();
+                        sEquipmentNo.Text = dt.Rows[0][5].ToString();
+                        sRawGMWT.Text = string.IsNullOrEmpty(dt.Rows[0][6].ToString()) ? "0.00" : dt.Rows[0][6].ToString();
                     }
                 }
                 catch (Exception ee)
@@ -224,7 +236,7 @@ namespace WeightRecord
                 return;
             }
             decimal Weight;
-            string @nWeight = this.nWeight.Text;
+            string @nWeight = this.nWeight.Text.Replace("kg", "");
             if (@nWeight == "")
                 @nWeight = "0";
             Weight = Convert.ToDecimal(@nWeight);
@@ -232,7 +244,7 @@ namespace WeightRecord
 
 
             //吧qmRawInspectHdr表中长度更新为折算长度
-            string sqlLength = "update qmRawInspectHdr SET nLength=" + CalcLength.Text + " where sFabricNo='" + this.sFabricNo.Text.Trim() + "'";
+            string sqlLength = "update qmRawInspectHdr SET nLength=" + CalcLength.Text.Replace("m", "") + ",tupdatetime='" + System.DateTime.Now.ToString() + "'" + " where sFabricNo='" + this.sFabricNo.Text.Trim() + "'";
 
             //搜寻mmMaterial表中 sModel字段  ，此字段保存最初qmRawInspectHdr的长度（第一次）
             string getsModel = "select sModel from mmMaterial a where sMaterialNo='" + sMaterialNo.Text.ToString() + "'";
@@ -267,8 +279,7 @@ namespace WeightRecord
                 cmdsqlLength.ExecuteNonQuery();//qmRawInspectHdr表中长度更新为折算长度
                 Sqlconn.Close();
                 MessageBox.Show("保存成功！");
-                Log log = new Log();
-                log.RegisterLog(string.Format("布卷号{0}的重量是{1}", this.sFabricNo.Text.Trim(), Math.Round(Weight, 2)), DateTime.Now.ToString());
+                Log.RegisterLog(string.Format("布卷号{0}的重量是{1},折算长度是{2}", this.sFabricNo.Text.Trim(), Math.Round(Weight, 2), CalcLength.Text.Replace("m", "")), DateTime.Now.ToString());
                 // PJ190327002
                 search.PerformClick();
 
@@ -299,9 +310,6 @@ namespace WeightRecord
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-
-
-
 
         private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
@@ -338,12 +346,12 @@ namespace WeightRecord
                         }
                         if (k != -1)
                         {
-                            nWeight.Text = (array[k].Trim().Replace('+', ' ').Replace('-', ' ').Replace("kg", " ")).Trim();
+                            nWeight.Text = (array[k].Trim().Replace('+', ' ').Replace('-', ' ').Replace("kg", " ")).Trim() + " kg";
                             if (sRawGMWT.Text != "" && Convert.ToDecimal(sRawGMWT.Text) > 0)
                             {
-                                Decimal @nWeight = Convert.ToDecimal(this.nWeight.Text);
+                                Decimal @nWeight = Convert.ToDecimal(this.nWeight.Text.Replace("kg", ""));
                                 Decimal @sRawGMWT = Convert.ToDecimal(this.sRawGMWT.Text);
-                                CalcLength.Text = Math.Round((@nWeight * 1000 / @sRawGMWT * 100), 2).ToString();
+                                CalcLength.Text = Math.Round((@nWeight * 1000 / @sRawGMWT), 2).ToString() + " m";
                             }
                         }
                         if (m != -1)
@@ -390,35 +398,33 @@ namespace WeightRecord
                 {
                     label8.Show();
                     label8.Text = "打开串口失败，请配置config文件中的串口！";
-                    label8.ForeColor =Color.Red;
+                    label8.ForeColor = Color.Red;
                     // MessageBox.Show("打开串口失败，请检查config文件！"); }
                 }
 
-                string senStr =sentStr;  //发送R
+                //   string senStr =sentStr;  //发送R
                 //senStr = sentMsg.Text;
-                try
-                {
-                    serialPort1.Write(senStr);
-                }
-                catch (Exception ex)
-                {
-                    label8.Show();
-                    label8.Text = "发送失败，请检查config文件中的发送命令！";
-                    //MessageBox.Show("发送失败");
-
-                }
-            }
-        }
-            private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-            {
-                timer1.Enabled = false;
 
             }
-
-            private void Mainpanel_Paint(object sender, PaintEventArgs e)
+            try
             {
+                serialPort1.Write(sentStr);
+            }
+            catch (Exception ex)
+            {
+                label8.Show();
+                label8.Text = "发送失败，请检查config文件！";
+                //MessageBox.Show("发送失败");
 
             }
         }
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            timer1.Enabled = false;
+
+        }
+
+
     }
+}
 
