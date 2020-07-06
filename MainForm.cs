@@ -13,6 +13,7 @@ namespace WeightRecord
 {
     public partial class MainForm : Form
     {
+        AutoSizeFormClass asc = new AutoSizeFormClass();
         private SerialPort com;
         private int isStable = 0;
         public static string connStr = ConfigHelper.GetConnectSql("SQL.xml");
@@ -27,10 +28,11 @@ namespace WeightRecord
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
+            asc.controllInitializeSize(this);
             //Log log = new Log();
             //log.RegisterLog(connStr, DateTime.Now.ToString());
             label8.Hide();
-            this.MaximizeBox = false;
+          //  this.MaximizeBox = false;
             // search.PerformClick();
             com = new SerialPort();
             string[] str = SerialPort.GetPortNames();
@@ -424,7 +426,10 @@ namespace WeightRecord
 
         }
 
-
+        private void MainForm_SizeChanged(object sender, EventArgs e)
+        {
+            asc.controlAutoSize(this);
+        }
     }
 }
 

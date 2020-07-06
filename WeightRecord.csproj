@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoSizeForm.cs" />
     <Compile Include="ConfigHelper.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="MainForm.cs">
