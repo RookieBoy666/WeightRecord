@@ -28,6 +28,7 @@ namespace WeightRecord
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
+            label9.Text = "福恩信息中心技术支持：周建平 18966091309";
             asc.controllInitializeSize(this);
             //Log log = new Log();
             //log.RegisterLog(connStr, DateTime.Now.ToString());
@@ -321,7 +322,7 @@ namespace WeightRecord
                 // int count = serialPort1.Read(readBuffer, 0, serialPort1.ReadBufferSize);
                 //int count = com.Read(readBuffer, 0, com.ReadBufferSize);        //读取串口数据(监听)
                 string SerialIn = serialPort1.ReadLine();// System.Text.Encoding.ASCII.GetString(readBuffer, 0, count);//将字节数组解码为字符串
-                Console.WriteLine(SerialIn);
+              Console.WriteLine(SerialIn);
                 // return;
                 if (SerialIn != string.Empty)
                 {
@@ -410,7 +411,7 @@ namespace WeightRecord
             }
             try
             {
-                serialPort1.Write(sentStr);
+                serialPort1.Write("R");
             }
             catch (Exception ex)
             {
@@ -422,13 +423,18 @@ namespace WeightRecord
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            timer1.Enabled = false;
+            //timer1.Enabled = false;
 
         }
 
         private void MainForm_SizeChanged(object sender, EventArgs e)
         {
             asc.controlAutoSize(this);
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

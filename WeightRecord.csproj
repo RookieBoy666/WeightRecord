@@ -83,6 +83,7 @@
   <ItemGroup>
     <Content Include="pic\1.ico" />
     <Content Include="pic\2.ico" />
+    <Content Include="SQL.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
