@@ -46,6 +46,7 @@
             this.lable1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.clear = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.nWeight = new System.Windows.Forms.TextBox();
             this.CalcLength = new System.Windows.Forms.TextBox();
@@ -55,10 +56,14 @@
             this.Mainpanel = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label10 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.Mainpanel.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // sEquipmentNo
@@ -169,7 +174,7 @@
             // save
             // 
             this.save.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.save.Location = new System.Drawing.Point(481, 255);
+            this.save.Location = new System.Drawing.Point(481, 272);
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(120, 51);
             this.save.TabIndex = 18;
@@ -180,7 +185,7 @@
             // search
             // 
             this.search.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.search.Location = new System.Drawing.Point(215, 255);
+            this.search.Location = new System.Drawing.Point(215, 272);
             this.search.Name = "search";
             this.search.Size = new System.Drawing.Size(120, 51);
             this.search.TabIndex = 36;
@@ -190,10 +195,10 @@
             // 
             // sFabricNo
             // 
-            this.sFabricNo.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.sFabricNo.Location = new System.Drawing.Point(125, 31);
+            this.sFabricNo.Font = new System.Drawing.Font("宋体", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.sFabricNo.Location = new System.Drawing.Point(125, 20);
             this.sFabricNo.Name = "sFabricNo";
-            this.sFabricNo.Size = new System.Drawing.Size(173, 30);
+            this.sFabricNo.Size = new System.Drawing.Size(173, 46);
             this.sFabricNo.TabIndex = 38;
             this.sFabricNo.MouseLeave += new System.EventHandler(this.textBox1_MouseLeave);
             // 
@@ -220,6 +225,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Controls.Add(this.clear);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.nWeight);
             this.panel1.Controls.Add(this.sMaterialNo);
@@ -237,37 +244,48 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.sEquipmentNo);
             this.panel1.Controls.Add(this.label7);
-            this.panel1.Location = new System.Drawing.Point(3, 17);
+            this.panel1.Location = new System.Drawing.Point(3, 26);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(846, 232);
+            this.panel1.Size = new System.Drawing.Size(858, 240);
             this.panel1.TabIndex = 40;
+            // 
+            // clear
+            // 
+            this.clear.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.clear.Location = new System.Drawing.Point(315, 31);
+            this.clear.Name = "clear";
+            this.clear.Size = new System.Drawing.Size(75, 23);
+            this.clear.TabIndex = 42;
+            this.clear.Text = "清空";
+            this.clear.UseVisualStyleBackColor = true;
+            this.clear.Click += new System.EventHandler(this.clear_Click);
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(315, 180);
+            this.pictureBox1.Location = new System.Drawing.Point(315, 171);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(50, 39);
+            this.pictureBox1.Size = new System.Drawing.Size(57, 48);
             this.pictureBox1.TabIndex = 41;
             this.pictureBox1.TabStop = false;
             // 
             // nWeight
             // 
-            this.nWeight.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.nWeight.Font = new System.Drawing.Font("微软雅黑", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nWeight.ForeColor = System.Drawing.Color.Red;
             this.nWeight.Location = new System.Drawing.Point(125, 171);
             this.nWeight.Name = "nWeight";
-            this.nWeight.Size = new System.Drawing.Size(173, 39);
+            this.nWeight.Size = new System.Drawing.Size(173, 60);
             this.nWeight.TabIndex = 28;
             this.nWeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nWeight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nWeight_KeyPress);
             // 
             // CalcLength
             // 
-            this.CalcLength.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.CalcLength.Font = new System.Drawing.Font("宋体", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.CalcLength.ForeColor = System.Drawing.Color.Blue;
             this.CalcLength.Location = new System.Drawing.Point(561, 171);
             this.CalcLength.Name = "CalcLength";
-            this.CalcLength.Size = new System.Drawing.Size(173, 35);
+            this.CalcLength.Size = new System.Drawing.Size(173, 53);
             this.CalcLength.TabIndex = 40;
             this.CalcLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -277,11 +295,11 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 312);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 329);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(846, 297);
+            this.dataGridView1.Size = new System.Drawing.Size(858, 280);
             this.dataGridView1.TabIndex = 42;
             // 
             // serialPort1
@@ -302,9 +320,10 @@
             this.Mainpanel.Controls.Add(this.dataGridView1);
             this.Mainpanel.Controls.Add(this.search);
             this.Mainpanel.Controls.Add(this.save);
+            this.Mainpanel.Controls.Add(this.menuStrip1);
             this.Mainpanel.Location = new System.Drawing.Point(12, 12);
             this.Mainpanel.Name = "Mainpanel";
-            this.Mainpanel.Size = new System.Drawing.Size(874, 640);
+            this.Mainpanel.Size = new System.Drawing.Size(874, 638);
             this.Mainpanel.TabIndex = 44;
             // 
             // label9
@@ -326,12 +345,42 @@
             this.label8.TabIndex = 43;
             this.label8.Text = "label8";
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.设置ToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(874, 25);
+            this.menuStrip1.TabIndex = 45;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // 设置ToolStripMenuItem
+            // 
+            this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
+            this.设置ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.设置ToolStripMenuItem.Text = "设置";
+            this.设置ToolStripMenuItem.Click += new System.EventHandler(this.设置ToolStripMenuItem_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("宋体", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label10.ForeColor = System.Drawing.Color.Red;
+            this.label10.Location = new System.Drawing.Point(740, 76);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(71, 18);
+            this.label10.TabIndex = 43;
+            this.label10.Text = "label10";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(898, 652);
+            this.ClientSize = new System.Drawing.Size(915, 646);
             this.Controls.Add(this.Mainpanel);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "称重记录";
@@ -344,6 +393,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.Mainpanel.ResumeLayout(false);
             this.Mainpanel.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -375,6 +426,10 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button clear;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 设置ToolStripMenuItem;
+        private System.Windows.Forms.Label label10;
     }
 }
 

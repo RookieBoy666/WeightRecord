@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.IO.Ports;
 using System.Windows.Forms;
-using System.Xml;
 
 namespace WeightRecord
 {
@@ -22,13 +20,21 @@ namespace WeightRecord
         string setInterval = ConfigurationSettings.AppSettings["setInterval"];
         string setCOM = ConfigurationSettings.AppSettings["chooseCOM"];
         string sentStr = ConfigurationSettings.AppSettings["senStr"];
+        string info=ConfigurationSettings.AppSettings["info"];
+        string tubeweight = ConfigurationSettings.AppSettings["TubeWeight"];
+        decimal tubeWeight=0;
         public MainForm()
         {
             InitializeComponent();
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
-            label9.Text = "福恩信息中心技术支持：周建平 18966091309";
+            if(!string.IsNullOrEmpty(tubeweight))
+            {
+                tubeWeight = ConfigHelper.GetNumber(tubeweight);
+            }
+            label10.Text = "管重："+tubeWeight.ToString()+"kg";
+            label9.Text = info;
             asc.controllInitializeSize(this);
             //Log log = new Log();
             //log.RegisterLog(connStr, DateTime.Now.ToString());
@@ -228,6 +234,11 @@ namespace WeightRecord
 
         private void save_Click_1(object sender, EventArgs e)
         {
+            if(Convert.ToDecimal(this.CalcLength.Text.Replace("m",""))<0)
+            {
+                MessageBox.Show("折算长度小于0！请检查管重是否正确！", "保存失败");
+                return;
+            }
             if (string.IsNullOrEmpty(sFabricNo.Text))
             {
                 MessageBox.Show("布卷号为空，确认失败！", "警告");
@@ -354,7 +365,7 @@ namespace WeightRecord
                             {
                                 Decimal @nWeight = Convert.ToDecimal(this.nWeight.Text.Replace("kg", ""));
                                 Decimal @sRawGMWT = Convert.ToDecimal(this.sRawGMWT.Text);
-                                CalcLength.Text = Math.Round((@nWeight * 1000 / @sRawGMWT), 2).ToString() + " m";
+                                CalcLength.Text = Math.Round(((@nWeight- tubeWeight) * 1000 / @sRawGMWT), 2).ToString() + " m";//此处要减去管(塑料或者纸管)重
                             }
                         }
                         if (m != -1)
@@ -411,7 +422,7 @@ namespace WeightRecord
             }
             try
             {
-                serialPort1.Write("R");
+                serialPort1.Write(sentStr);
             }
             catch (Exception ex)
             {
@@ -433,6 +444,36 @@ namespace WeightRecord
         }
 
         private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void clear_Click(object sender, EventArgs e)
+        {
+            CalcLength.Text = "";
+
+            nLength.Text = "";
+            sCardNo.Text = "";
+
+            sRawGMWT.Text = "";
+            sMaterialNo.Text = "";
+            sEquipmentNo.Text = "";
+            this.sFabricNo.Text = "";
+        }
+
+        private void 设置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            setting setting = new setting();
+            setting.Show();
+             //this.Hide();
+
+            //Thread th = new Thread(delegate () { new setting().ShowDialog(); });
+            //th.Start();
+            //this.Dispose();
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
         {
 
         }
