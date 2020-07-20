@@ -56,7 +56,7 @@ namespace WeightRecord
                 ConfigHelper.SetValue("getAllCOM", "本机的所有可用端口为：" + arrayList[i].ToString() + " ");
 
             }
-            ConfigHelper.SetValue("AllCOMCount", "此设备共有" + arrayList.Count.ToString() + "个可用COM端口");
+            ConfigHelper.SetValue("AllCOMCount", "此设备共有" + arrayList.Count.ToString() + "个COM端口");
 
             if (arrayList.Count == 1)
             {
@@ -203,7 +203,7 @@ namespace WeightRecord
                     dataGridView1.Columns[1].HeaderText = "卡号";
                     dataGridView1.Columns[2].HeaderText = "款号";
                     dataGridView1.Columns[3].HeaderText = "折算长度";
-                    dataGridView1.Columns[4].HeaderText = "长度";
+                    dataGridView1.Columns[4].HeaderText = "原长度";
                     dataGridView1.Columns[5].HeaderText = "设备号";
                     dataGridView1.Columns[6].HeaderText = "克重";
                     dataGridView1.Columns[7].HeaderText = "重量";
@@ -213,7 +213,7 @@ namespace WeightRecord
                     {
                         sCardNo.Text = dt.Rows[0][1].ToString();
                         sMaterialNo.Text = dt.Rows[0][2].ToString();
-                        nLength.Text = dt.Rows[0][4].ToString();
+                        nLength.Text = dt.Rows[0][3].ToString();
                         sEquipmentNo.Text = dt.Rows[0][5].ToString();
                         sRawGMWT.Text = string.IsNullOrEmpty(dt.Rows[0][6].ToString()) ? "0.00" : dt.Rows[0][6].ToString();
                     }
