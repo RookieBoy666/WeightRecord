@@ -46,7 +46,15 @@
             this.lable1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.clear = new System.Windows.Forms.Button();
+            this.clear = new System.Windows.Forms.PictureBox();
+            this.Tube2 = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.netWeight = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.Tube3 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.Tube1 = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.nWeight = new System.Windows.Forms.TextBox();
             this.CalcLength = new System.Windows.Forms.TextBox();
@@ -57,29 +65,27 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label10 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.clear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.Mainpanel.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // sEquipmentNo
             // 
             this.sEquipmentNo.Font = new System.Drawing.Font("宋体", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.sEquipmentNo.Location = new System.Drawing.Point(561, 109);
+            this.sEquipmentNo.Location = new System.Drawing.Point(538, 103);
             this.sEquipmentNo.Name = "sEquipmentNo";
             this.sEquipmentNo.ReadOnly = true;
-            this.sEquipmentNo.Size = new System.Drawing.Size(173, 27);
+            this.sEquipmentNo.Size = new System.Drawing.Size(133, 27);
             this.sEquipmentNo.TabIndex = 30;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(491, 113);
+            this.label7.Location = new System.Drawing.Point(471, 108);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(58, 22);
             this.label7.TabIndex = 29;
@@ -89,26 +95,26 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(58, 171);
+            this.label5.Location = new System.Drawing.Point(69, 199);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(71, 30);
+            this.label5.Size = new System.Drawing.Size(57, 30);
             this.label5.TabIndex = 27;
-            this.label5.Text = "重  量";
+            this.label5.Text = "毛重";
             // 
             // nLength
             // 
             this.nLength.Font = new System.Drawing.Font("宋体", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.nLength.Location = new System.Drawing.Point(561, 31);
+            this.nLength.Location = new System.Drawing.Point(538, 70);
             this.nLength.Name = "nLength";
             this.nLength.ReadOnly = true;
-            this.nLength.Size = new System.Drawing.Size(173, 27);
+            this.nLength.Size = new System.Drawing.Size(133, 27);
             this.nLength.TabIndex = 26;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(491, 31);
+            this.label4.Location = new System.Drawing.Point(476, 71);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 22);
             this.label4.TabIndex = 25;
@@ -117,17 +123,17 @@
             // sRawGMWT
             // 
             this.sRawGMWT.Font = new System.Drawing.Font("宋体", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.sRawGMWT.Location = new System.Drawing.Point(561, 72);
+            this.sRawGMWT.Location = new System.Drawing.Point(538, 137);
             this.sRawGMWT.Name = "sRawGMWT";
             this.sRawGMWT.ReadOnly = true;
-            this.sRawGMWT.Size = new System.Drawing.Size(173, 27);
+            this.sRawGMWT.Size = new System.Drawing.Size(133, 27);
             this.sRawGMWT.TabIndex = 24;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(490, 76);
+            this.label3.Location = new System.Drawing.Point(476, 142);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 22);
             this.label3.TabIndex = 23;
@@ -137,7 +143,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(59, 113);
+            this.label2.Location = new System.Drawing.Point(74, 112);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 22);
             this.label2.TabIndex = 22;
@@ -146,26 +152,26 @@
             // sMaterialNo
             // 
             this.sMaterialNo.Font = new System.Drawing.Font("宋体", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.sMaterialNo.Location = new System.Drawing.Point(125, 109);
+            this.sMaterialNo.Location = new System.Drawing.Point(140, 108);
             this.sMaterialNo.Name = "sMaterialNo";
             this.sMaterialNo.ReadOnly = true;
-            this.sMaterialNo.Size = new System.Drawing.Size(173, 27);
+            this.sMaterialNo.Size = new System.Drawing.Size(207, 27);
             this.sMaterialNo.TabIndex = 21;
             // 
             // sCardNo
             // 
             this.sCardNo.Font = new System.Drawing.Font("宋体", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.sCardNo.Location = new System.Drawing.Point(125, 72);
+            this.sCardNo.Location = new System.Drawing.Point(140, 71);
             this.sCardNo.Name = "sCardNo";
             this.sCardNo.ReadOnly = true;
-            this.sCardNo.Size = new System.Drawing.Size(173, 27);
+            this.sCardNo.Size = new System.Drawing.Size(207, 27);
             this.sCardNo.TabIndex = 20;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(59, 76);
+            this.label1.Location = new System.Drawing.Point(74, 75);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 22);
             this.label1.TabIndex = 19;
@@ -174,7 +180,7 @@
             // save
             // 
             this.save.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.save.Location = new System.Drawing.Point(481, 272);
+            this.save.Location = new System.Drawing.Point(461, 272);
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(120, 51);
             this.save.TabIndex = 18;
@@ -185,7 +191,7 @@
             // search
             // 
             this.search.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.search.Location = new System.Drawing.Point(215, 272);
+            this.search.Location = new System.Drawing.Point(230, 272);
             this.search.Name = "search";
             this.search.Size = new System.Drawing.Size(120, 51);
             this.search.TabIndex = 36;
@@ -196,19 +202,20 @@
             // sFabricNo
             // 
             this.sFabricNo.Font = new System.Drawing.Font("宋体", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.sFabricNo.Location = new System.Drawing.Point(125, 20);
+            this.sFabricNo.Location = new System.Drawing.Point(305, 12);
             this.sFabricNo.Name = "sFabricNo";
-            this.sFabricNo.Size = new System.Drawing.Size(173, 46);
+            this.sFabricNo.Size = new System.Drawing.Size(223, 46);
             this.sFabricNo.TabIndex = 38;
+            this.sFabricNo.TextChanged += new System.EventHandler(this.sFabricNo_TextChanged);
             this.sFabricNo.MouseLeave += new System.EventHandler(this.textBox1_MouseLeave);
             // 
             // lable1
             // 
             this.lable1.AutoSize = true;
-            this.lable1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lable1.Location = new System.Drawing.Point(61, 31);
+            this.lable1.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lable1.Location = new System.Drawing.Point(220, 21);
             this.lable1.Name = "lable1";
-            this.lable1.Size = new System.Drawing.Size(58, 22);
+            this.lable1.Size = new System.Drawing.Size(79, 30);
             this.lable1.TabIndex = 37;
             this.lable1.Text = "布卷号";
             // 
@@ -216,17 +223,24 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(460, 171);
+            this.label6.Location = new System.Drawing.Point(529, 184);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(101, 30);
+            this.label6.Size = new System.Drawing.Size(57, 60);
             this.label6.TabIndex = 39;
-            this.label6.Text = "折算长度";
+            this.label6.Text = "折算\r\n长度";
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.clear);
+            this.panel1.Controls.Add(this.Tube2);
+            this.panel1.Controls.Add(this.label13);
+            this.panel1.Controls.Add(this.netWeight);
+            this.panel1.Controls.Add(this.label12);
+            this.panel1.Controls.Add(this.Tube3);
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Controls.Add(this.Tube1);
+            this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.nWeight);
             this.panel1.Controls.Add(this.sMaterialNo);
@@ -244,27 +258,104 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.sEquipmentNo);
             this.panel1.Controls.Add(this.label7);
-            this.panel1.Location = new System.Drawing.Point(3, 26);
+            this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(858, 240);
+            this.panel1.Size = new System.Drawing.Size(888, 263);
             this.panel1.TabIndex = 40;
             // 
             // clear
             // 
-            this.clear.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.clear.Location = new System.Drawing.Point(315, 31);
+            this.clear.Image = global::WeightRecord.Properties.Resources.clear;
+            this.clear.Location = new System.Drawing.Point(524, -3);
             this.clear.Name = "clear";
-            this.clear.Size = new System.Drawing.Size(75, 23);
-            this.clear.TabIndex = 42;
-            this.clear.Text = "清空";
-            this.clear.UseVisualStyleBackColor = true;
-            this.clear.Click += new System.EventHandler(this.clear_Click);
+            this.clear.Size = new System.Drawing.Size(68, 64);
+            this.clear.TabIndex = 53;
+            this.clear.TabStop = false;
+            this.clear.Click += new System.EventHandler(this.clear_Click_1);
+            // 
+            // Tube2
+            // 
+            this.Tube2.Font = new System.Drawing.Font("宋体", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Tube2.Location = new System.Drawing.Point(284, 144);
+            this.Tube2.Name = "Tube2";
+            this.Tube2.Size = new System.Drawing.Size(63, 27);
+            this.Tube2.TabIndex = 52;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label13.Location = new System.Drawing.Point(487, 199);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(41, 30);
+            this.label13.TabIndex = 51;
+            this.label13.Text = "kg";
+            // 
+            // netWeight
+            // 
+            this.netWeight.Font = new System.Drawing.Font("微软雅黑", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.netWeight.ForeColor = System.Drawing.Color.Red;
+            this.netWeight.Location = new System.Drawing.Point(353, 184);
+            this.netWeight.Name = "netWeight";
+            this.netWeight.Size = new System.Drawing.Size(134, 60);
+            this.netWeight.TabIndex = 50;
+            this.netWeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label12.Location = new System.Drawing.Point(290, 199);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(57, 30);
+            this.label12.TabIndex = 49;
+            this.label12.Text = "净重";
+            // 
+            // Tube3
+            // 
+            this.Tube3.AutoSize = true;
+            this.Tube3.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Tube3.Location = new System.Drawing.Point(348, 138);
+            this.Tube3.Name = "Tube3";
+            this.Tube3.Size = new System.Drawing.Size(36, 27);
+            this.Tube3.TabIndex = 48;
+            this.Tube3.Text = "kg";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label10.Location = new System.Drawing.Point(241, 144);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(42, 22);
+            this.label10.TabIndex = 46;
+            this.label10.Text = "管重";
+            // 
+            // Tube1
+            // 
+            this.Tube1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Tube1.FormattingEnabled = true;
+            this.Tube1.Location = new System.Drawing.Point(140, 144);
+            this.Tube1.Name = "Tube1";
+            this.Tube1.Size = new System.Drawing.Size(98, 24);
+            this.Tube1.TabIndex = 45;
+            this.Tube1.SelectedIndexChanged += new System.EventHandler(this.Tube1_SelectedIndexChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label11.Location = new System.Drawing.Point(74, 146);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(57, 22);
+            this.label11.TabIndex = 44;
+            this.label11.Text = "管   型";
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(315, 171);
+            this.pictureBox1.Location = new System.Drawing.Point(729, 184);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(57, 48);
+            this.pictureBox1.Size = new System.Drawing.Size(49, 53);
             this.pictureBox1.TabIndex = 41;
             this.pictureBox1.TabStop = false;
             // 
@@ -272,9 +363,9 @@
             // 
             this.nWeight.Font = new System.Drawing.Font("微软雅黑", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nWeight.ForeColor = System.Drawing.Color.Red;
-            this.nWeight.Location = new System.Drawing.Point(125, 171);
+            this.nWeight.Location = new System.Drawing.Point(140, 183);
             this.nWeight.Name = "nWeight";
-            this.nWeight.Size = new System.Drawing.Size(173, 60);
+            this.nWeight.Size = new System.Drawing.Size(136, 60);
             this.nWeight.TabIndex = 28;
             this.nWeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nWeight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nWeight_KeyPress);
@@ -283,9 +374,9 @@
             // 
             this.CalcLength.Font = new System.Drawing.Font("宋体", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.CalcLength.ForeColor = System.Drawing.Color.Blue;
-            this.CalcLength.Location = new System.Drawing.Point(561, 171);
+            this.CalcLength.Location = new System.Drawing.Point(592, 184);
             this.CalcLength.Name = "CalcLength";
-            this.CalcLength.Size = new System.Drawing.Size(173, 53);
+            this.CalcLength.Size = new System.Drawing.Size(131, 53);
             this.CalcLength.TabIndex = 40;
             this.CalcLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -299,7 +390,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(858, 280);
+            this.dataGridView1.Size = new System.Drawing.Size(888, 280);
             this.dataGridView1.TabIndex = 42;
             // 
             // serialPort1
@@ -323,7 +414,7 @@
             this.Mainpanel.Controls.Add(this.menuStrip1);
             this.Mainpanel.Location = new System.Drawing.Point(12, 12);
             this.Mainpanel.Name = "Mainpanel";
-            this.Mainpanel.Size = new System.Drawing.Size(874, 638);
+            this.Mainpanel.Size = new System.Drawing.Size(894, 638);
             this.Mainpanel.TabIndex = 44;
             // 
             // label9
@@ -334,7 +425,6 @@
             this.label9.Size = new System.Drawing.Size(41, 12);
             this.label9.TabIndex = 44;
             this.label9.Text = "label9";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // label8
             // 
@@ -347,54 +437,31 @@
             // 
             // menuStrip1
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.设置ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(874, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(894, 24);
             this.menuStrip1.TabIndex = 45;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // 设置ToolStripMenuItem
-            // 
-            this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
-            this.设置ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
-            this.设置ToolStripMenuItem.Text = "设置";
-            this.设置ToolStripMenuItem.Click += new System.EventHandler(this.设置ToolStripMenuItem_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("宋体", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label10.ForeColor = System.Drawing.Color.Red;
-            this.label10.Location = new System.Drawing.Point(740, 76);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(71, 18);
-            this.label10.TabIndex = 43;
-            this.label10.Text = "label10";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(915, 646);
+            this.ClientSize = new System.Drawing.Size(918, 646);
             this.Controls.Add(this.Mainpanel);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "称重记录";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Text = "坯布称重";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.clear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.Mainpanel.ResumeLayout(false);
             this.Mainpanel.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -426,10 +493,16 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button clear;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem 设置ToolStripMenuItem;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox Tube1;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label Tube3;
+        private System.Windows.Forms.TextBox netWeight;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox Tube2;
+        private System.Windows.Forms.PictureBox clear;
     }
 }
 

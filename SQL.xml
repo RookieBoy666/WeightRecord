@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
-  <SQLSettings>
-    <add key="Data Source"                   value="192.168.88.6" />  
-    <add key="Initial Catalog"              value="HSTextileERP" />  
-    <add key="Persist Security Info"         value="True" />  
-    <add key="Connect Timeout"               value="6" />  
-    <add key="User ID"                        value="iS+7vzOX6EY=" />  
-    <add key="Password"                     value="gYzDzg456Og=" />  
-
-  </SQLSettings>
+	<SQLSettings>
+		<add key="Data Source"                   value="192.168.88.6" />
+		<add key="Initial Catalog"              value="HSTextileERP" />
+		<add key="Persist Security Info"         value="True" />
+		<add key="Connect Timeout"               value="6" />
+		<add key="User ID"                        value="iS+7vzOX6EY=" />
+		<add key="Password"                     value="gYzDzg456Og=" />
+		<!--select sValueName,sTypeCode, sValueCode  , sRemark from dbo.pbDataDictionary where sTypeCode = 'TubeWeight'  and bUsable = 1 order by iOrderNo-->
+	</SQLSettings>
 </configuration>
- 

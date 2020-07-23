@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>WeightRecord</RootNamespace>
     <AssemblyName>WeightRecord</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -90,9 +90,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="pic\1.ico" />
-    <Content Include="pic\2.ico" />
+    <Content Include="Resources\1.ico" />
+    <Content Include="Resources\2.ico" />
+    <None Include="Resources\clear.png" />
     <Content Include="SQL.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="pic\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

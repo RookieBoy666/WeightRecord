@@ -30,7 +30,7 @@ namespace WeightRecord
                 xElem2.SetAttribute("value", AppValue);
                 xNode.AppendChild(xElem2);
             }
-            xDoc.Save(System.Windows.Forms.Application.ExecutablePath + ".config");
+            xDoc.Save(Application.ExecutablePath + ".config");
         }
         /// <summary>
         /// 返回字典，字典的值不是动态的
@@ -142,15 +142,12 @@ namespace WeightRecord
 
             string PasswordKey = PasswordxElem.GetAttribute("key");
             string PasswordValue = PasswordxElem.GetAttribute("value");
-
-
             hashtable.Add(DataSourceKey, DataSourceValue);
             hashtable.Add(InitialCatalogKey, InitialCatalogValue);
             hashtable.Add(PersistSecurityInfoKey, PersistSecurityInfoValue);
             hashtable.Add(ConnectTimeoutKey, ConnectTimeoutValue);
             hashtable.Add(UserIDKey, UserIDValue);
             hashtable.Add(PasswordKey, PasswordValue);
-
             return hashtable;
 
 
@@ -260,8 +257,8 @@ namespace WeightRecord
             if (str != null && str != string.Empty)
             {
                 // 正则表达式剔除非数字字符（不包含小数点.）
-                //str = Regex.Replace(str, @"[^/d./d]", "");
-                str = Regex.Replace(str, @"[^\d.\d]", "");
+                str = Regex.Replace(str, @"[^/d./d]", "");
+                //str = Regex.Replace(str, @"[^\d.\d]", "");
                 // 如果是数字，则转换为decimal类型
                 if (Regex.IsMatch(str, @"^[+-]?\d*[.]?\d*$"))
                 {
