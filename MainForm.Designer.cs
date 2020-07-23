@@ -85,7 +85,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(471, 108);
+            this.label7.Location = new System.Drawing.Point(476, 108);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(58, 22);
             this.label7.TabIndex = 29;
@@ -204,7 +204,7 @@
             this.sFabricNo.Font = new System.Drawing.Font("宋体", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.sFabricNo.Location = new System.Drawing.Point(305, 12);
             this.sFabricNo.Name = "sFabricNo";
-            this.sFabricNo.Size = new System.Drawing.Size(223, 46);
+            this.sFabricNo.Size = new System.Drawing.Size(236, 46);
             this.sFabricNo.TabIndex = 38;
             this.sFabricNo.TextChanged += new System.EventHandler(this.sFabricNo_TextChanged);
             this.sFabricNo.MouseLeave += new System.EventHandler(this.textBox1_MouseLeave);
@@ -265,10 +265,12 @@
             // 
             // clear
             // 
+            this.clear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.clear.Image = global::WeightRecord.Properties.Resources.clear;
-            this.clear.Location = new System.Drawing.Point(524, -3);
+            this.clear.Location = new System.Drawing.Point(545, 12);
             this.clear.Name = "clear";
-            this.clear.Size = new System.Drawing.Size(68, 64);
+            this.clear.Size = new System.Drawing.Size(41, 46);
+            this.clear.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.clear.TabIndex = 53;
             this.clear.TabStop = false;
             this.clear.Click += new System.EventHandler(this.clear_Click_1);
@@ -315,7 +317,7 @@
             // 
             this.Tube3.AutoSize = true;
             this.Tube3.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Tube3.Location = new System.Drawing.Point(348, 138);
+            this.Tube3.Location = new System.Drawing.Point(348, 140);
             this.Tube3.Name = "Tube3";
             this.Tube3.Size = new System.Drawing.Size(36, 27);
             this.Tube3.TabIndex = 48;

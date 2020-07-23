@@ -7,7 +7,6 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
-using System.Resources;
 using System.Windows.Forms;
 
 namespace WeightRecord
@@ -21,15 +20,16 @@ namespace WeightRecord
 
         // public static string connStr = "Data Source=192.168.88.4;Initial Catalog = HSTextileERP;Persist Security Info = True;User ID = zjp;Password =123456 ;Connect Timeout=8;";
         string setInterval = ConfigurationSettings.AppSettings["setInterval"];
+        [Obsolete]
         string setCOM = ConfigurationSettings.AppSettings["chooseCOM"];
+        [Obsolete]
         string sentStr = ConfigurationSettings.AppSettings["senStr"];
         string info = ConfigurationSettings.AppSettings["info"];
-        // string tubeweight = ConfigurationSettings.AppSettings["TubeWeight"];
+        string tubetype = ConfigurationSettings.AppSettings["TubeType"];
+        string tubeweight = ConfigurationSettings.AppSettings["TubeWeight"];
         decimal tubeWeight = 0;
         string tubeType = "";
 
-        string tubetype = ConfigurationSettings.AppSettings["TubeType"];
-        string tubeweight = ConfigurationSettings.AppSettings["TubeWeight"];
         List<string> ids = new List<string>();//管重列表
         List<string> idCode = new List<string>();//管型列表
         public MainForm()
@@ -38,6 +38,8 @@ namespace WeightRecord
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
+
+            //   new FrmMsg("查找失败", "fbjslfbj", true).ShowDialog();
 
             #region
             Tube1.Text = tubetype;
@@ -58,7 +60,7 @@ namespace WeightRecord
                 Sqlconn.Open();
                 DataSet ds = new DataSet();
                 SqlDataAdapter da = new SqlDataAdapter(sql, Sqlconn);
-                // da.Fill(ds);
+
                 DataTable dataTable = new DataTable();
                 da.Fill(dataTable);
 
@@ -76,7 +78,8 @@ namespace WeightRecord
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                //  MessageBox.Show(ex.ToString());
+                new FrmMsg("系统提示", ex.Message.ToString(), false).ShowDialog();
             }
             finally
             {
@@ -100,7 +103,8 @@ namespace WeightRecord
             string[] str = SerialPort.GetPortNames();
             if (str.Length == 0)
             {
-                MessageBox.Show("本机没有串口或者串口连接失败,磅秤重量读取将会失败！", "警告");
+                //MessageBox.Show("本机没有串口或者串口连接失败,磅秤重量读取将会失败！", "警告");
+                new FrmMsg("系统提示", "本机没有串口或者串口连接失败,磅秤重量读取将会失败！", false).ShowDialog();
                 return;
             }
             string[] portNmaes;
@@ -168,7 +172,9 @@ namespace WeightRecord
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.Message, "保存失败", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                //   MessageBox.Show(ee.Message, "保存失败", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                new FrmMsg("保存失败", ee.Message, false).ShowDialog();
+
             }
         }
         private void search_Click_1(object sender, EventArgs e)
@@ -215,7 +221,9 @@ namespace WeightRecord
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.Message, "查找失败", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                //   MessageBox.Show(ee.Message, "查找失败", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                new FrmMsg("查找失败", ee.Message, false).ShowDialog();
+
             }
 
         }
@@ -268,7 +276,9 @@ namespace WeightRecord
                 }
                 catch (Exception ee)
                 {
-                    MessageBox.Show(ee.Message, "查找失败", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    //  MessageBox.Show(ee.Message, "查找失败", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    new FrmMsg("查找失败", ee.Message, false).ShowDialog();
+
                 }
             }
         }
@@ -276,22 +286,27 @@ namespace WeightRecord
         {
             if (string.IsNullOrEmpty(sFabricNo.Text))
             {
-                MessageBox.Show("布卷号为空，确认失败！", "警告");
+                // MessageBox.Show("布卷号为空，确认失败！", "警告");
+                new FrmMsg("系统提示", "布卷号为空，确认失败！", false).ShowDialog();
+
                 return;
             }
             if (Convert.ToDecimal(this.CalcLength.Text.Replace("m", "")) < 0)
             {
-                MessageBox.Show("折算长度小于0！请检查管重是否正确！", "保存失败");
+                //MessageBox.Show("折算长度小于0！请检查管重是否正确！", "保存失败");
+                new FrmMsg("系统提示", "折算长度小于0！请检查管重是否正确！", false).ShowDialog();
                 return;
             }
             if (Convert.ToDecimal(this.CalcLength.Text.Replace("m", "")) == 0)
             {
-                MessageBox.Show("折算长度等于0！", "保存失败");
+                // MessageBox.Show("折算长度等于0！", "保存失败");
+                new FrmMsg("保存失败", "折算长度等于0！", false).ShowDialog();
                 return;
             }
             if (isStable != 1)
             {
-                MessageBox.Show("当前称重量不稳定，保存失败！", "警告");
+                //  MessageBox.Show("当前称重量不稳定，保存失败！", "警告");
+                new FrmMsg("保存失败", "当前称重量不稳定！", false).ShowDialog();
                 return;
             }
             decimal Weight;
@@ -327,18 +342,19 @@ namespace WeightRecord
                     SqlCommand cmdsModel = new SqlCommand(sqlsModel, Sqlconn);
                     cmdsModel.ExecuteNonQuery();//如果sModel为空，更新mmMaterial表中的sModel为qmRawInspectHdr表最初的长度（第一次）
                 }
-
                 SqlCommand cmdsqlLength = new SqlCommand(sqlLength, Sqlconn);
                 cmdsqlLength.ExecuteNonQuery();//qmRawInspectHdr表中长度更新为折算长度
                 Sqlconn.Close();
-                MessageBox.Show("保存成功！");
+                // MessageBox.Show("保存成功！");
+                new FrmMsg("系统提示", "保存成功！", false).ShowDialog();
                 Log.RegisterLog(string.Format("布卷号{0}的重量是{1},折算长度是{2}", this.sFabricNo.Text.Trim(), Math.Round(Weight, 2), CalcLength.Text.Replace("m", "")), DateTime.Now.ToString());
-                // PJ190327002
                 search.PerformClick();
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.Message, "保存失败", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                //MessageBox.Show(ee.Message, "保存失败", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                new FrmMsg("保存失败", ee.Message, false).ShowDialog();
+                //    new FrmMsg("系统提示", "保存成功！", false).ShowDialog();
             }
         }
 
@@ -420,8 +436,6 @@ namespace WeightRecord
                             //this.BackgroundImage = (Bitmap)resman.GetObject("aa");
                             ////或者直接这样写，name为资源中已有的名称
                             //this.BackgroundImage = (Bitmap)Properties.Resources.ResourceManager.GetObject("1.ico");
-
-
                             pictureBox1.Image = Image.FromFile(picPath);
                         }
                         else
@@ -445,7 +459,9 @@ namespace WeightRecord
         {
             if (string.IsNullOrEmpty(serialPort1.PortName))
             {
-                MessageBox.Show("串口读取失败！");
+
+                //MessageBox.Show("串口读取失败！");
+                new FrmMsg("系统提示", "串口读取失败！！", false).ShowDialog();
                 return;
             }
             timer1.Interval = int.Parse(setInterval);//int.Parse(intervalValue.Value.ToString());
@@ -460,7 +476,6 @@ namespace WeightRecord
                     label8.Show();
                     label8.Text = "打开串口失败，请配置config文件中的串口！";
                     label8.ForeColor = Color.Red;
-                    // MessageBox.Show("打开串口失败，请检查config文件！"); }
                 }
             }
             try
@@ -471,15 +486,12 @@ namespace WeightRecord
             {
                 label8.Show();
                 label8.Text = "发送失败，请检查config文件！";
-                //MessageBox.Show("发送失败");
             }
         }
         private void MainForm_SizeChanged(object sender, EventArgs e)
         {
             asc.controlAutoSize(this);
         }
-
-
         private void 设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             setting setting = new setting();
@@ -489,16 +501,19 @@ namespace WeightRecord
             //this.Dispose();
 
         }
-
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="dtSource">数据集</param>
+        /// <param name="filedName">列名</param>
+        /// <returns></returns>
         public static List<T> GetColumnValues<T>(DataTable dtSource, string filedName)
         {
             return (from r in dtSource.AsEnumerable() select r.Field<T>(filedName)).ToList<T>();
         }
-
         private void Tube1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             tubeType = Tube1.SelectedItem.ToString();//tubeWeight=ConfigHelper.GetNumber(TubeWeight1.SelectedItem.ToString());
             Tube2.Text = ids[Tube1.SelectedIndex];
             try
@@ -506,17 +521,17 @@ namespace WeightRecord
                 //将选择的管型重量保存到配置文件里面
                 ConfigHelper.SetValue("TubeType", Tube1.Text.ToString());
                 ConfigHelper.SetValue("TubeWeight", Tube2.Text.ToString());
-                //  MessageBox.Show("保存成功");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "保存管型失败");
+                // MessageBox.Show(ex.ToString(), "保存管型失败");
+                new FrmMsg("系统提示", "保存管型失败！", false).ShowDialog();
             }
         }
 
         private void sFabricNo_TextChanged(object sender, EventArgs e)
         {
-            if (this.sFabricNo.Text.Length >=10)
+            if (this.sFabricNo.Text.Length >= 10)
             {
                 this.sFabricNo.TextChanged += new System.EventHandler(textBox1_MouseLeave);
             }
