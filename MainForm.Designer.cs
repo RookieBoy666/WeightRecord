@@ -231,7 +231,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel1.Controls.Add(this.clear);
             this.panel1.Controls.Add(this.Tube2);
             this.panel1.Controls.Add(this.label13);
@@ -267,20 +267,20 @@
             // 
             this.clear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.clear.Image = global::WeightRecord.Properties.Resources.clear;
-            this.clear.Location = new System.Drawing.Point(545, 12);
+            this.clear.Location = new System.Drawing.Point(547, 12);
             this.clear.Name = "clear";
-            this.clear.Size = new System.Drawing.Size(41, 46);
-            this.clear.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.clear.Size = new System.Drawing.Size(39, 29);
+            this.clear.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.clear.TabIndex = 53;
             this.clear.TabStop = false;
             this.clear.Click += new System.EventHandler(this.clear_Click_1);
             // 
             // Tube2
             // 
-            this.Tube2.Font = new System.Drawing.Font("宋体", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Tube2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Tube2.Location = new System.Drawing.Point(284, 144);
             this.Tube2.Name = "Tube2";
-            this.Tube2.Size = new System.Drawing.Size(63, 27);
+            this.Tube2.Size = new System.Drawing.Size(63, 30);
             this.Tube2.TabIndex = 52;
             // 
             // label13
@@ -335,11 +335,12 @@
             // 
             // Tube1
             // 
-            this.Tube1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Tube1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Tube1.Font = new System.Drawing.Font("宋体", 17F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Tube1.FormattingEnabled = true;
             this.Tube1.Location = new System.Drawing.Point(140, 144);
             this.Tube1.Name = "Tube1";
-            this.Tube1.Size = new System.Drawing.Size(98, 24);
+            this.Tube1.Size = new System.Drawing.Size(98, 31);
             this.Tube1.TabIndex = 45;
             this.Tube1.SelectedIndexChanged += new System.EventHandler(this.Tube1_SelectedIndexChanged);
             // 

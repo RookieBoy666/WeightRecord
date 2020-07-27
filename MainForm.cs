@@ -211,7 +211,7 @@ namespace WeightRecord
                 dataGridView1.Columns[1].HeaderText = "卡号";
                 dataGridView1.Columns[2].HeaderText = "款号";
                 dataGridView1.Columns[3].HeaderText = "折算长度";
-                dataGridView1.Columns[4].HeaderText = "长度";
+                dataGridView1.Columns[4].HeaderText = "验布长度";
                 dataGridView1.Columns[5].HeaderText = "设备号";
                 dataGridView1.Columns[6].HeaderText = "克重";
                 dataGridView1.Columns[7].HeaderText = "重量";
@@ -525,7 +525,7 @@ namespace WeightRecord
             catch (Exception ex)
             {
                 // MessageBox.Show(ex.ToString(), "保存管型失败");
-                new FrmMsg("系统提示", "保存管型失败！", false).ShowDialog();
+                new FrmMsg("系统提示", "保存管型失败！", false).ShowDialog(); 
             }
         }
 
