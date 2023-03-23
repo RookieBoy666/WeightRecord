@@ -197,7 +197,7 @@
             this.search.TabIndex = 36;
             this.search.Text = "查询";
             this.search.UseVisualStyleBackColor = true;
-            this.search.Click += new System.EventHandler(this.search_Click_1);
+            this.search.Click += new System.EventHandler(this.search_Click);
             // 
             // sFabricNo
             // 
